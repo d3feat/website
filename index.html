@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>d3feat</title>
+    <link rel="icon" href="./inc/favicon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500');
+
+        body {
+            margin: 0;
+            font-family: 'IBM Plex Sans', sans-serif;
+            background-color: #f1f1f1;
+            color: #051037;
+        }
+
+        body>img {
+            width: 70vw;
+            width: auto;
+            margin: auto;
+        }
+
+        a {
+            color: #1644EB;
+        }
+
+        .logo {
+            width: 180px;
+            height: auto;
+            margin: 20px;
+        }
+
+        .text {
+            padding: 0 20px;
+        }
+
+        .text h1 {
+            font-weight: 400;
+            font-size: 32px;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .text p {
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 1.7;
+            margin: 5px 0;
+        }
+
+        .emoji-loader {
+            display: inline-block;
+            user-select: none;
+        }
+
+        .emoji-loader._variation-1 {
+            transform: rotate(90deg);
+        }
+
+        .emoji-loader._variation-2 {
+            transform: rotate(270deg);
+        }
+
+        i {
+            font-style: normal;
+            border-bottom: 1px dashed #051037;
+        }
+
+        .jscache {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./inc/bobbli.svg" alt="d3feat" class="logo">
+    <div class="text">
+        <h1>
+            <span class="--js title-text">Loading </span>
+            <span>
+                <span class="--js emoji-loader _variation-2" data-set="moon" data-start="0" data-interval="300"></span>
+                <span class="--js emoji-loader _variation-2" data-set="moon" data-start="1" data-interval="300"></span>
+                <span class="--js emoji-loader _variation-2" data-set="moon" data-start="2" data-interval="300"></span>
+            </span>
+        </h1>
+        <p>We're making this site even better;</p>
+        <p>Feel free to reach us via <a href="mailto:team@d3feat.website">e-mail</a></p>
+
+        <br>
+        <p>Now, <i style="cursor: pointer;" onclick="
+                document.body.innerHTML = '<img src=\'./inc/btw.png\' alt=\'back to work\'></i>';
+                 document.body.style.textAlign = 'center';
+                 document.body.style.backgroundColor = '#fff';
+                ">get
+                back to work</i></p>
+        <div class="--js jscache">
+            <img src="./inc/btw.png" alt="back to work">
+        </div>
+    </div>
+    <script>
+        var loadingTexts = [
+            'Please be patient ',
+            'Halt!',
+            'cómo estás?',
+            '«???»',
+            'Hang on there',
+            'Check back later'
+        ]
+
+        document.querySelector('.--js.title-text').innerHTML = loadingTexts[Math.floor(Math.random() * loadingTexts.length)]
+
+        var sets = {
+            moon: ['🌕', '🌖', '🌗', '🌘', '🌑', '🌒', '🌓', '🌔']
+        }
+        document.querySelectorAll('.--js.emoji-loader').forEach(function (node) {
+            var set = node.dataset.set;
+            var start = Number(node.dataset.start);
+            var interval = Number(node.dataset.interval) || 200;
+            if (sets[set]) {
+                var targetSet = sets[set]
+                start = (targetSet.length < start) ? start : 0
+                idx = start;
+                node.innerHTML = targetSet[idx];
+                setInterval(function () {
+                    node.innerHTML = targetSet[idx];
+                    idx = idx < (targetSet.length - 1) ? idx + 1 : 0
+                }, interval)
+            }
+        })
+    </script>
+</body>
+
+</html>
